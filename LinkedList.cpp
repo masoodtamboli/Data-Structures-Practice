@@ -4,7 +4,7 @@ using namespace std;
 struct Node{
     int data;
     Node *next;
-}*head, *tail, *temp, *current, *previous;
+}*head, *tail, *temp, *current, *previous, *nextNode;
 
 class LinkedList{
 public:
@@ -125,6 +125,28 @@ public:
         return -1;
     }
 
+    void reverse(){
+        if(isEmpty()){
+            cout<<"Error: LinkedList is empty"<<endl;
+        }else{
+            current = head;
+            previous = NULL;
+            while(current != NULL){
+                nextNode = current->next;
+                current->next = previous;
+                previous = current;
+                current = nextNode;
+            }
+            head = previous;
+        }
+        temp = head;
+        while(temp != NULL){
+            cout << temp->data << "->";
+            temp = temp->next;
+        }
+        cout<<"NUll"<<endl;
+    }
+
     void display(){
         if(isEmpty()){
             cout<<"Error: LinkedList is empty"<<endl;
@@ -164,4 +186,5 @@ int main(){
     }else{
         cout<< "Element is not present in LinkedList"<<endl;
     }
+    L.reverse();
 }
