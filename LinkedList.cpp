@@ -4,7 +4,7 @@ using namespace std;
 struct Node{
     int data;
     Node *next;
-}*head, *tail, *temp;
+}*head, *tail, *temp, *current, *previous;
 
 class LinkedList{
 public:
@@ -34,6 +34,80 @@ public:
         }
     }
 
+    void addNodeBegin(int val){
+        temp = new Node;
+        temp->data = val;
+        temp->next = NULL;
+        if(isEmpty()){
+            head = temp;
+            tail = temp;
+        }else{
+            temp->next = head;
+            head = temp;
+        }
+    }
+
+    void addNodeMid(int val, int key){
+        temp = new Node;
+        temp->data = val;
+        temp->next = NULL;
+        if(isEmpty()){
+            head = temp;
+            tail = temp;
+        }else{
+            current = head;
+            while(current != NULL){
+                if(current->data == key){
+                    temp->next = current->next;
+                    current->next =temp;
+                }
+                current = current->next;
+            }
+        }
+    }
+
+    void deleteNode(int val){
+        if(isEmpty()){
+            cout << "Error: LinkedList is Empty" << endl;
+        }else{
+            temp = head;
+            while(temp != NULL){
+                if(temp->data == val){
+                    previous->next = temp->next;
+                }
+                previous = temp;
+                temp = temp->next;
+                
+            }
+        }
+    }
+
+    void deleteNodeBegin(){
+        if(isEmpty()){
+            cout << "Error: LinkedList is empty" << endl;
+        }else{
+            temp = head;
+            head = head->next;
+            delete temp;
+        }
+    }
+
+    void deleteNodeEnd(){
+        if(isEmpty()){
+            cout << "Error: LinkedList is empty" << endl;
+        }else{
+            temp = head;
+            while(temp != tail){
+                previous = temp;
+                temp = temp->next;
+            }
+            if(temp == tail){
+                previous->next = NULL;
+                tail = previous;
+            }
+        }
+    }
+
     void display(){
         if(isEmpty()){
             cout<<"Error: LinkedList is empty"<<endl;
@@ -55,5 +129,17 @@ int main(){
     L.addNode(30);
     L.addNode(40);
     L.addNode(50);
+    L.addNodeBegin(9);
+    L.addNodeBegin(8);
+    L.addNodeBegin(7);
+    L.addNodeMid(11,10);
+    L.addNodeMid(12,11);
+    L.addNodeMid(13,12);
+    L.display();
+    L.deleteNode(12);
+    L.deleteNode(13);
+    L.deleteNodeBegin();
+    L.display();
+    L.deleteNodeEnd();
     L.display();
 }
