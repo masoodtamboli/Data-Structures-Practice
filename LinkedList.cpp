@@ -108,6 +108,23 @@ public:
         }
     }
 
+    int search(int key){
+        int count = 0;
+        if(isEmpty()){
+            cout<<"Error: LinkedList is empty"<<endl;
+        }else{
+            temp = head;
+            while(temp != NULL){
+                if(temp->data == key){
+                    return count;
+                }
+                temp = temp->next;
+                count++;
+            }
+        }
+        return -1;
+    }
+
     void display(){
         if(isEmpty()){
             cout<<"Error: LinkedList is empty"<<endl;
@@ -142,4 +159,9 @@ int main(){
     L.display();
     L.deleteNodeEnd();
     L.display();
+    if(L.search(255) > -1){
+        cout << "Element is present at:" <<L.search(255) <<endl;
+    }else{
+        cout<< "Element is not present in LinkedList"<<endl;
+    }
 }
